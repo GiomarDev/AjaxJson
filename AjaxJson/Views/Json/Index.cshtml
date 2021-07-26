@@ -1,0 +1,26 @@
+﻿@model List<AjaxJson.Models.tblTable>
+@{
+    ViewBag.Title = "Index";
+}
+<input type="button" onclick="Obten();" value="obtener"/>
+<div id="MiDiv">
+
+</div>
+<script>
+
+    function Obten() {
+        fetch("@Url.Content("~/Json/ObtenerPersonas")")
+            .then(function (index) {
+                return index.json();
+            })
+            .then(function (miJson) {
+                let miResult = "";
+                for (var i = 0; i < miJson.length; i++) {
+                    miResult += "<p>" + miJson[i].nombre + "</p>";
+                }
+
+                return document.getElementById("MiDiv").innerHTML = miResult;
+            })
+    }
+
+</script>
